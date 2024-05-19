@@ -1,0 +1,18 @@
+<div class="player-name-container">
+  <div class="form">
+    <label for="name" class="form__label">Please enter your name:</label>
+    <input
+      maxlength="20"
+      type="text"
+      [(ngModel)]="playerName"
+      (input)="onInputChange()"
+      type="text"
+      class="form__input"
+      placeholder="Full name"
+    />
+  </div>
+  <div class="nav-buttons">
+    <button (click)="backClicked()">back</button>
+    <button (click)="nextStep()">start game</button>
+  </div>
+</div>

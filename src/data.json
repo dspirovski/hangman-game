@@ -1,0 +1,38 @@
+{
+  "countries": [
+    "USA",
+    "Canada",
+    "Mexico",
+    "Brazil",
+    "UK",
+    "France",
+    "Germany",
+    "Japan",
+    "China",
+    "India"
+  ],
+  "fruits": [
+    "Apple",
+    "Banana",
+    "Orange",
+    "Grapes",
+    "Strawberry",
+    "Watermelon",
+    "Pineapple",
+    "Mango",
+    "Kiwi",
+    "Peach"
+  ],
+  "animals": [
+    "Lion",
+    "Tiger",
+    "Elephant",
+    "Giraffe",
+    "Zebra",
+    "Monkey",
+    "Kangaroo",
+    "Panda",
+    "Bear",
+    "Wolf"
+  ]
+}

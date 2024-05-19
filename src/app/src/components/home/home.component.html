@@ -1,0 +1,31 @@
+<section class="home-header">
+  <div class="title-wrapper">
+    <h1 class="title">
+      <span data-text="the">the</span>
+      <span data-text="hangman">hangman</span>
+      <span data-text="game">game</span>
+    </h1>
+  </div>
+</section>
+<section class="disclaimer">
+  <div class="home-container">
+    <button (click)="nextStep()" class="button">
+      <div class="plate"></div>
+      <div class="plate"></div>
+      <div class="plate"></div>
+      <div class="plate"></div>
+      <div class="plate"></div>
+      <div class="button__wrapper">
+        <span class="button__text" (click)="nextStep()">PLAY</span>
+      </div>
+      <div class="button__box">
+        <div class="inner inner__top"></div>
+        <div class="inner inner__front"></div>
+        <div class="inner inner__bottom"></div>
+        <div class="inner inner__back"></div>
+        <div class="inner inner__left"></div>
+        <div class="inner inner__right"></div>
+      </div>
+    </button>
+  </div>
+</section>

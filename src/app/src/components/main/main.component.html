@@ -1,0 +1,45 @@
+<div class="main-component">
+  <div class="main-top">
+    <h3>Category: {{ choosenCategory }}</h3>
+    <div class="progress-bar">
+      <div
+        class="heart"
+        [ngStyle]="{ 'animation-duration': heartBeating + 's' }"
+      ></div>
+      <label for="file"></label>
+      <progress id="file" max="10" [value]="progress">{{ progress }}%</progress>
+    </div>
+    <button class="exit-button" role="button" (click)="exitGame()">exit</button>
+  </div>
+  <div>
+    <div class="margin-top">
+      <span *ngFor="let item of secretWordArray; let i = index">
+        <span class="letters">
+          <span *ngIf="item.visible">
+            {{ item.key }}
+          </span>
+        </span>
+      </span>
+    </div>
+  </div>
+  <div>
+    <div class="margin-top">
+      <span
+        (click)="choosenLetter(item)"
+        *ngFor="let item of letters"
+        class="letters letters-bottom"
+      >
+        <span>{{ item }}</span>
+      </span>
+    </div>
+  </div>
+  <h3>Score: {{ score }}</h3>
+  <app-dialog
+    *ngIf="showDialog"
+    [playerName]="playerName"
+    [playerWins]="playerWins"
+    [score]="score"
+    [secretWord]="secretWord"
+    [newGame]="generateNewGame()"
+  ></app-dialog>
+</div>

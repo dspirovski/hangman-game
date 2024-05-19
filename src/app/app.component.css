@@ -1,0 +1,7 @@
+.app-container {
+  background-image: url("../assets/background.jpg");
+  height: 97vh;
+  margin: 0;
+  padding: 0;
+  background-size: 100% 100%;
+}

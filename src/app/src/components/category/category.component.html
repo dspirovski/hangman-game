@@ -1,0 +1,18 @@
+<div class="category-component">
+  <div class="categories-wrapper">
+    <h1>Please select category:</h1>
+    <div class="categories-list">
+      <button
+        [ngClass]="choosenCategory === item ? 'choosen-category' : ''"
+        *ngFor="let item of categories"
+        (click)="chooseCategory(item)"
+      >
+        {{ item }}
+      </button>
+    </div>
+  </div>
+  <div class="nav-buttons">
+    <button (click)="previousStep()">back</button>
+    <button (click)="nextStep()">next</button>
+  </div>
+</div>
