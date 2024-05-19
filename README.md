@@ -1,4 +1,4 @@
-# hangman-game
+# Hangman game
 In this Hangman game, user is able to:
 
 - start a game and choose a category;
