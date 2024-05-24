@@ -20,7 +20,6 @@ import { MainComponent } from '../main/main.component';
   styleUrl: './dialog.component.css',
 })
 export class DialogComponent implements OnInit, OnDestroy {
-  @Input() playerName!: string;
   @Input() playerWins!: string;
   @Input() score!: number;
   @Input() secretWord!: string;

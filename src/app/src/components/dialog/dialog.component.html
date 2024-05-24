@@ -1,13 +1,12 @@
 <dialog #appDialog class="dialog-container">
   <!-- content if player wins the game -->
   <div class="dialog-wrapper" *ngIf="playerWins">
-    <h3>Congratulations {{ playerName }}, you win!</h3>
+    <h3>Congratulations, you win!</h3>
     <img class="emoji" src="../../../../assets/happy.png" alt="smiley-face" />
     <h4>Your score is {{ score }}.</h4>
   </div>
   <!-- content if player loose the game -->
   <div class="dialog-wrapper" *ngIf="!playerWins">
-    <h3>{{ playerName }}, you loose the game.</h3>
     <img class="emoji" src="../../../../assets/sad.png" alt="sad-face" />
     <h4>Secret word was {{ secretWord }}.</h4>
   </div>

@@ -17,7 +17,6 @@ export class MainComponent implements OnInit {
   progress = 5;
   score: any = 10;
   showDialog: boolean = false;
-  playerName: any = '';
   playerWins: any = null;
   choosenCategory: any = '';
   heartBeating: any = 8;
@@ -30,7 +29,6 @@ export class MainComponent implements OnInit {
     this.choosenCategory = localStorage.getItem('choosenCategory');
     this.data = data;
     this.playerWins = null;
-    this.playerName = localStorage.getItem('playerName');
 
     this.generateNewGame();
   }
@@ -92,13 +90,20 @@ export class MainComponent implements OnInit {
     }
 
     for (let i = 0; i < characters.length; i++) {
-      this.secretWordArray.push({ key: characters[i], visible: false });
+      if (characters[i] === ' ') {
+        this.secretWordArray.push({
+          key: characters[i],
+          visible: true,
+          hidden: true,
+        });
+      } else {
+        this.secretWordArray.push({ key: characters[i], visible: false });
+      }
     }
   }
 
   exitGame() {
     localStorage.removeItem('choosenCategory');
-    localStorage.removeItem('playerName');
     this.router.navigate(['']);
   }
 
@@ -109,6 +114,7 @@ export class MainComponent implements OnInit {
       }
 
       const checkForCorrectAnswer = this.secretWordArray.every((el: any) => {
+        debugger;
         return el.visible === true;
       });
 

@@ -7,14 +7,17 @@
         [ngStyle]="{ 'animation-duration': heartBeating + 's' }"
       ></div>
       <label for="file"></label>
-      <progress id="file" max="10" [value]="progress">{{ progress }}%</progress>
+      <progress id="file" max="10" [value]="progress">{{ progress }}</progress>
     </div>
     <button class="exit-button" role="button" (click)="exitGame()">exit</button>
   </div>
   <div>
     <div class="margin-top">
       <span *ngFor="let item of secretWordArray; let i = index">
-        <span class="letters">
+        <span
+          class="letters"
+          [ngClass]="item.hidden === true ? 'hide-letter' : ''"
+        >
           <span *ngIf="item.visible">
             {{ item.key }}
           </span>
@@ -36,7 +39,6 @@
   <h3>Score: {{ score }}</h3>
   <app-dialog
     *ngIf="showDialog"
-    [playerName]="playerName"
     [playerWins]="playerWins"
     [score]="score"
     [secretWord]="secretWord"

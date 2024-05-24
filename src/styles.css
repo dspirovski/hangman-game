@@ -182,6 +182,10 @@
   justify-content: space-evenly;
   height: 30%;
 }
+
+.hide-letter {
+  visibility: hidden;
+}
 .categories-list {
   text-align: center;
   width: 60%;

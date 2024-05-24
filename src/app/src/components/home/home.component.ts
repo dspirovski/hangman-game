@@ -13,7 +13,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     localStorage.removeItem('choosenCategory');
-    localStorage.removeItem('playerName');
   }
   toCategoryComponent() {
     this.router.navigate(['/category']);
