@@ -1,0 +1,18 @@
+<div class="how-to-play-container">
+  <div class="how-to-play-heading">
+    <img
+      class="back-arrow"
+      src="../../../../assets/back-arrow.png"
+      alt="back-arrow"
+      (click)="backClicked()"
+    />
+    <h1>How To Play</h1>
+  </div>
+  <div class="rules-container">
+    <ul class="how-to-play-rules" *ngFor="let item of rules">
+      <li class="rules-header">{{ item.id }}</li>
+      <li class="rules-category">{{ item.header }}</li>
+      <li class="rules-description">{{ item.description }}</li>
+    </ul>
+  </div>
+</div>

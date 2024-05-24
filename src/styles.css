@@ -1,3 +1,21 @@
+:root {
+  --primary-color: #2463ff;
+  --secondary-color: #fff;
+  --font-2XL: 5.5rem;
+  --font-XL: 5rem;
+  --font-large: 2.5rem;
+  --font-medium: 2rem;
+  --font-small: 1.5rem;
+  --font-extra-small: 1.1rem;
+
+  --background-color: #261676;
+  --body-color: #887dc0;
+  --opaque-top: #0043ece2;
+  --opaque-background: #26167677;
+  --font-body: 1rem;
+  --menu-gap: 1rem;
+}
+
 /* main component */
 .main-component {
   display: flex;
@@ -174,12 +192,6 @@
   background: linear-gradient(90deg, #0000 33%, #fff5, #0000 67%)
       var(--_p, 100%) / 300% no-repeat,
     rgb(11, 100, 184);
-}
-
-.nav-buttons {
-  display: flex;
-  justify-content: space-evenly;
-  width: 100%;
 }
 
 /* dialog component */
@@ -394,18 +406,64 @@
   text-align: center;
 }
 
-.play-btn {
+.play-icon {
   width: 100%;
   text-align: center;
 }
 
-.play-btn > img {
+.play-icon > img {
   border-radius: 50%;
   width: 150px;
   height: 150px;
 }
 
-.play-btn > img:hover {
+.play-icon > img:hover {
+  cursor: pointer;
+}
+/* how-to-play component */
+
+.rules-description {
+  font-size: var(--font-extra-small);
+  color: var(--body-color);
+  font-weight: 600;
+}
+
+.rules-category {
+  text-transform: uppercase;
+  color: var(--background-color);
+  font-weight: bold;
+  font-size: var(--font-small);
+}
+.how-to-play-rules > li,
+.how-to-play-rules > .rules-header {
+  list-style-type: none;
+  text-align: center;
+}
+
+.how-to-play-rules > .rules-header {
+  font-size: var(--font-XL);
+  color: var(--primary-color);
+}
+.rules-container {
+  display: flex;
+  justify-content: space-between;
+}
+.how-to-play-rules {
+  justify-content: space-around;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  width: 20vw;
+  height: 50vh;
+  border-radius: 10px;
+  padding: 0 10px;
+}
+.back-arrow {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.back-arrow:hover {
   cursor: pointer;
 }
 .how-to-play {
@@ -413,22 +471,26 @@
   text-align: center;
 }
 
-/* player name component */
-
-.player-name-container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
+.how-to-play-container {
+  padding: 0 6%;
 }
 
-.form {
-  width: 100%;
+.how-to-play-heading {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  padding: 0 20px;
+  background-color: white;
+  background-image: linear-gradient(#67b6ff, white);
+  background-size: 100%;
+  background-repeat: repeat;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+}
+
+.how-to-play-heading > h1 {
+  font-size: var(--font-2XL);
 }
 
 .btn {
@@ -453,6 +515,9 @@
   -webkit-user-select: none;
   touch-action: manipulation;
   width: 200px;
+}
+
+.home-btn {
   margin: auto;
 }
 
@@ -467,16 +532,6 @@
   }
 }
 
-.nav-buttons > button,
-.categories-list > button {
-  font-family: system-ui, sans-serif;
-  font-weight: bold;
-  font-size: 3rem;
-  margin: 0;
-  cursor: pointer;
-  padding: 5px 10px;
-}
-
 .dialog-buttons > button {
   font-size: 25px;
   margin-top: 8px;
@@ -484,28 +539,4 @@
       var(--_p, 100%) / 300% no-repeat,
     rgb(63, 161, 251); /* background color */
   padding: 5px 10px;
-}
-
-.nav-buttons {
-  display: flex;
-  justify-content: space-evenly;
-  width: 100%;
-}
-
-.form__input {
-  color: #333;
-  font-size: 20px;
-  border-radius: 0.2rem;
-  background-color: rgb(255, 255, 255);
-  border: none;
-  width: 20%;
-  height: 35px;
-  display: block;
-  border-bottom: 0.3rem solid transparent;
-  transition: all 0.3s;
-}
-
-.form__label {
-  font-size: 30px;
-  margin-bottom: 10px;
 }

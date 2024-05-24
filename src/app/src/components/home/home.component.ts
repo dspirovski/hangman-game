@@ -18,4 +18,8 @@ export class HomeComponent implements OnInit {
   toCategoryComponent() {
     this.router.navigate(['/category']);
   }
+
+  toHowToPlayComponent() {
+    this.router.navigate(['/how-to-play']);
+  }
 }

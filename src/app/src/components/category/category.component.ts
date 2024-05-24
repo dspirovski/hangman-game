@@ -36,6 +36,6 @@ export class CategoryComponent implements OnInit {
       return;
     }
 
-    this.router.navigate(['/player-name']);
+    this.router.navigate(['/how-to-play']);
   }
 }
