@@ -1,18 +1,22 @@
-<div class="category-component">
+<div class="how-to-play-container">
+  <div class="how-to-play-heading">
+    <img
+      class="back-arrow"
+      src="../../../../assets/back-arrow.png"
+      alt="back-arrow"
+      (click)="backClicked()"
+    />
+    <h1>Pick a Category</h1>
+  </div>
   <div class="categories-wrapper">
-    <h1>Please select category:</h1>
     <div class="categories-list">
       <button
-        [ngClass]="choosenCategory === item ? 'choosen-category' : ''"
+        class="btn"
         *ngFor="let item of categories"
         (click)="chooseCategory(item)"
       >
         {{ item }}
       </button>
     </div>
-  </div>
-  <div class="nav-buttons">
-    <button (click)="previousStep()">back</button>
-    <button (click)="nextStep()">next</button>
   </div>
 </div>

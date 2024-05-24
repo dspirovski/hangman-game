@@ -10,13 +10,24 @@ import { Router } from '@angular/router';
   styleUrl: './category.component.css',
 })
 export class CategoryComponent implements OnInit {
-  categories = ['countries', 'animals', 'fruits'];
+  categories = [
+    'countries',
+    'animals',
+    'movies',
+    'tv shows',
+    'capital cities',
+    'sports',
+  ];
   choosenCategory: string | null = '';
 
   constructor(private _location: Location, private router: Router) {}
 
   ngOnInit() {
     this.choosenCategory = localStorage.getItem('choosenCategory');
+  }
+
+  backClicked() {
+    this._location.back();
   }
 
   previousStep() {
@@ -26,6 +37,7 @@ export class CategoryComponent implements OnInit {
   chooseCategory(item: any) {
     this.choosenCategory = '';
     localStorage.setItem('choosenCategory', item);
+    this.router.navigate(['/main']);
   }
 
   nextStep() {
