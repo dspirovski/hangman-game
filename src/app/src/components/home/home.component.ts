@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
     localStorage.removeItem('choosenCategory');
     localStorage.removeItem('playerName');
   }
-  nextStep() {
+  toCategoryComponent() {
     this.router.navigate(['/category']);
   }
 }
