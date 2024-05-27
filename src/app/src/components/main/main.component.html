@@ -1,6 +1,11 @@
 <div class="main-component">
   <div class="main-top">
-    <h3>Category: {{ choosenCategory }}</h3>
+    <button class="circle-btn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <h3>{{ choosenCategory }}</h3>
     <div class="progress-bar">
       <div
         class="heart"
@@ -9,7 +14,6 @@
       <label for="file"></label>
       <progress id="file" max="10" [value]="progress">{{ progress }}</progress>
     </div>
-    <button class="exit-button" role="button" (click)="exitGame()">exit</button>
   </div>
   <div>
     <div class="margin-top">
