@@ -1,11 +1,11 @@
 <div class="main-component">
   <div class="main-top">
-    <button class="circle-btn">
+    <button class="circle-btn" (click)="pauseGame()">
       <span></span>
       <span></span>
       <span></span>
     </button>
-    <h3>{{ choosenCategory }}</h3>
+    <h3 class="gradient-header">{{ choosenCategory }}</h3>
     <div class="progress-bar">
       <div
         class="heart"
@@ -41,11 +41,10 @@
     </div>
   </div>
   <h3>Score: {{ score }}</h3>
-  <app-dialog
-    *ngIf="showDialog"
+  <app-modal
     [playerWins]="playerWins"
-    [score]="score"
+    [generateNewGame]="generateNewGame"
+    [gameIsPaused]="gameIsPaused"
     [secretWord]="secretWord"
-    [newGame]="generateNewGame()"
-  ></app-dialog>
+  ></app-modal>
 </div>

@@ -1,12 +1,14 @@
+import { ModalService } from './../../services/modal.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { DialogComponent } from '../dialog/dialog.component';
 import * as data from '../../../../data.json';
+import { ModalComponent } from '../modal/modal.component';
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [CommonModule, DialogComponent],
+  imports: [CommonModule, DialogComponent, ModalComponent],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css',
 })
@@ -17,13 +19,14 @@ export class MainComponent implements OnInit {
   progress = 5;
   score: any = 10;
   showDialog: boolean = false;
-  playerWins: any = null;
+  playerWins: any = '';
   choosenCategory: any = '';
   heartBeating: any = 8;
+  gameIsPaused: boolean = false;
 
   letters: any = [];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private modal: ModalService) {}
 
   ngOnInit() {
     this.choosenCategory = localStorage.getItem('choosenCategory');
@@ -31,6 +34,7 @@ export class MainComponent implements OnInit {
     this.playerWins = null;
 
     this.generateNewGame();
+    console.log('secretWord', this.secretWord);
   }
 
   setLetters() {
@@ -63,11 +67,18 @@ export class MainComponent implements OnInit {
       'z',
     ];
   }
+  openModal() {
+    this.modal.open();
+  }
 
+  pauseGame() {
+    this.openModal();
+    this.gameIsPaused = true;
+  }
   //generates new game
-  generateNewGame() {
+  generateNewGame = () => {
     this.setLetters();
-    this.showDialog = false;
+    this.modal.close();
     this.score = 10;
     this.heartBeating = 8;
     this.letters = this.letters;
@@ -100,7 +111,7 @@ export class MainComponent implements OnInit {
         this.secretWordArray.push({ key: characters[i], visible: false });
       }
     }
-  }
+  };
 
   exitGame() {
     localStorage.removeItem('choosenCategory');
@@ -114,13 +125,12 @@ export class MainComponent implements OnInit {
       }
 
       const checkForCorrectAnswer = this.secretWordArray.every((el: any) => {
-        debugger;
         return el.visible === true;
       });
 
       if (checkForCorrectAnswer) {
         this.playerWins = true;
-        this.showDialog = true;
+        this.modal.open();
       }
     }
 
@@ -141,7 +151,7 @@ export class MainComponent implements OnInit {
     //display alert message if playes lose the game
     if (this.score === 0) {
       this.playerWins = false;
-      this.showDialog = true;
+      this.openModal();
       return;
     }
 
