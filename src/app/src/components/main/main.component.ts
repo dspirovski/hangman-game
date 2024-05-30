@@ -2,13 +2,12 @@ import { ModalService } from './../../services/modal.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { DialogComponent } from '../dialog/dialog.component';
 import * as data from '../../../../data.json';
 import { ModalComponent } from '../modal/modal.component';
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [CommonModule, DialogComponent, ModalComponent],
+  imports: [CommonModule, ModalComponent],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css',
 })
@@ -18,7 +17,6 @@ export class MainComponent implements OnInit {
   secretWordArray: any = [];
   progress = 5;
   score: any = 10;
-  showDialog: boolean = false;
   playerWins: any = '';
   choosenCategory: any = '';
   heartBeating: any = 8;
@@ -34,7 +32,6 @@ export class MainComponent implements OnInit {
     this.playerWins = null;
 
     this.generateNewGame();
-    console.log('secretWord', this.secretWord);
   }
 
   setLetters() {
@@ -68,17 +65,19 @@ export class MainComponent implements OnInit {
     ];
   }
   openModal() {
+    this.gameIsPaused = true;
     this.modal.open();
   }
 
-  pauseGame() {
-    this.openModal();
-    this.gameIsPaused = true;
-  }
+  // pauseGame() {
+  //   this.openModal();
+  // }
   //generates new game
   generateNewGame = () => {
     this.setLetters();
     this.modal.close();
+    this.playerWins = null;
+    this.gameIsPaused = false;
     this.score = 10;
     this.heartBeating = 8;
     this.letters = this.letters;
@@ -151,7 +150,7 @@ export class MainComponent implements OnInit {
     //display alert message if playes lose the game
     if (this.score === 0) {
       this.playerWins = false;
-      this.openModal();
+      this.modal.open();
       return;
     }
 

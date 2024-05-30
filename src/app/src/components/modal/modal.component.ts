@@ -25,8 +25,9 @@ export class ModalComponent {
 
   continueGame() {
     this.isVisible = false;
-    this.playerWins = false;
-    this.gameIsPaused = false;
+    setTimeout(() => {
+      this.gameIsPaused = true;
+    }, 1000);
   }
 
   close() {
