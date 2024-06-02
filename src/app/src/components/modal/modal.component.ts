@@ -12,7 +12,8 @@ import { Router } from '@angular/router';
 })
 export class ModalComponent {
   isVisible = false;
-  @Input() playerWins = false;
+  @Input() playerWins: any = false;
+  @Input() playerLoose: any = false;
   @Input() generateNewGame!: () => void;
   @Input() gameIsPaused: boolean = false;
   @Input() secretWord: string = '';
@@ -31,7 +32,10 @@ export class ModalComponent {
   }
 
   close() {
-    this.gameIsPaused = false;
+    this.playerLoose = null;
+    this.playerLoose = null;
+    // this.gameIsPaused = false;
+    debugger;
     this.modalService.close();
   }
 

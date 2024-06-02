@@ -56,6 +56,11 @@
   align-items: center;
 }
 
+.main-left {
+  display: flex;
+  align-items: center;
+}
+
 .main-top {
   width: 100%;
   display: flex;
@@ -63,9 +68,13 @@
   align-items: center;
 }
 
-.main-top > h3 {
+.main-left > h3 {
   font-size: var(--font-large);
   color: var(--secondary-color);
+}
+
+.dimce {
+  border: 2px solid red;
 }
 
 .letters {
@@ -551,6 +560,7 @@
 
 .secret-word {
   color: var(--secondary-color);
+  justify-content: center;
   text-align: center;
 }
 

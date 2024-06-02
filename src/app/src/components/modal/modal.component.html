@@ -1,10 +1,8 @@
 <div class="modal-backdrop" *ngIf="isVisible" (click)="close()"></div>
 <div class="modal" *ngIf="isVisible">
   <div class="modal-content">
-    <div *ngIf="gameIsPaused && !playerWins">
+    <div *ngIf="gameIsPaused && !playerLoose && !playerWins">
       <h3 class="gradient-header secret-word">Paused</h3>
-      {{ playerWins | json }}
-      {{ gameIsPaused | json }}
       <div class="modal-buttons">
         <button class="btn" (click)="continueGame()">Continue</button>
         <button class="btn" (click)="toCategoryComponent()">
@@ -15,8 +13,6 @@
     </div>
     <div *ngIf="playerWins">
       <h3 class="modal-heading gradient-header">You win!</h3>
-      {{ playerWins | json }}
-      {{ gameIsPaused | json }}
       <div class="modal-buttons">
         <button class="btn" (click)="callGenerateNewGame()">Play again</button>
         <button class="btn" (click)="toCategoryComponent()">
@@ -25,10 +21,8 @@
         <button class="btn" (click)="quitGame()">Quit game</button>
       </div>
     </div>
-    <div *ngIf="!playerWins && !gameIsPaused">
+    <div *ngIf="playerLoose">
       <h3 class="modal-heading gradient-header">You loose</h3>
-      {{ playerWins | json }}
-      {{ gameIsPaused | json }}
       <p class="secret-word">Secret word was {{ secretWord }}.</p>
       <div class="modal-buttons">
         <button class="btn" (click)="callGenerateNewGame()">Play again</button>

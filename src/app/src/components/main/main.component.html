@@ -1,11 +1,13 @@
 <div class="main-component">
   <div class="main-top">
-    <button class="circle-btn" (click)="openModal()">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-    <h3 class="gradient-header">{{ choosenCategory }}</h3>
+    <div class="main-left">
+      <button class="circle-btn" (click)="openModal()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <h3 class="gradient-header">{{ choosenCategory }}</h3>
+    </div>
     <div class="progress-bar">
       <div
         class="heart"
@@ -43,6 +45,7 @@
   <h3>Score: {{ score }}</h3>
   <app-modal
     [playerWins]="playerWins"
+    [playerLoose]="playerLoose"
     [generateNewGame]="generateNewGame"
     [gameIsPaused]="gameIsPaused"
     [secretWord]="secretWord"

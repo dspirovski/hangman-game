@@ -18,6 +18,7 @@ export class MainComponent implements OnInit {
   progress = 5;
   score: any = 10;
   playerWins: any = '';
+  playerLoose: any = '';
   choosenCategory: any = '';
   heartBeating: any = 8;
   gameIsPaused: boolean = false;
@@ -77,6 +78,7 @@ export class MainComponent implements OnInit {
     this.setLetters();
     this.modal.close();
     this.playerWins = null;
+    this.playerLoose = null;
     this.gameIsPaused = false;
     this.score = 10;
     this.heartBeating = 8;
@@ -129,6 +131,7 @@ export class MainComponent implements OnInit {
 
       if (checkForCorrectAnswer) {
         this.playerWins = true;
+        this.playerLoose = false;
         this.modal.open();
       }
     }
@@ -149,7 +152,7 @@ export class MainComponent implements OnInit {
 
     //display alert message if playes lose the game
     if (this.score === 0) {
-      this.playerWins = false;
+      this.playerLoose = true;
       this.modal.open();
       return;
     }
