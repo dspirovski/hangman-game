@@ -36,9 +36,13 @@
       <span
         (click)="choosenLetter(item)"
         *ngFor="let item of letters"
-        class="letters letters-bottom"
+        [ngClass]="
+          item.visible === true
+            ? 'letters letters-bottom'
+            : 'letters letters-bottom faded-disabled'
+        "
       >
-        <span>{{ item }}</span>
+        <span>{{ item.letter }}</span>
       </span>
     </div>
   </div>

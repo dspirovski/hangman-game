@@ -17,6 +17,11 @@
 }
 
 /* main component */
+.faded-disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
 .circle-btn {
   width: 75px;
   height: 75px;

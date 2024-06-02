@@ -37,32 +37,32 @@ export class MainComponent implements OnInit {
 
   setLetters() {
     this.letters = [
-      'a',
-      'b',
-      'c',
-      'd',
-      'e',
-      'f',
-      'g',
-      'h',
-      'i',
-      'j',
-      'k',
-      'l',
-      'm',
-      'n',
-      'o',
-      'p',
-      'q',
-      'r',
-      's',
-      't',
-      'u',
-      'v',
-      'w',
-      'x',
-      'y',
-      'z',
+      { letter: 'a', visible: true },
+      { letter: 'b', visible: true },
+      { letter: 'c', visible: true },
+      { letter: 'd', visible: true },
+      { letter: 'e', visible: true },
+      { letter: 'f', visible: true },
+      { letter: 'g', visible: true },
+      { letter: 'h', visible: true },
+      { letter: 'i', visible: true },
+      { letter: 'j', visible: true },
+      { letter: 'k', visible: true },
+      { letter: 'l', visible: true },
+      { letter: 'm', visible: true },
+      { letter: 'n', visible: true },
+      { letter: 'o', visible: true },
+      { letter: 'p', visible: true },
+      { letter: 'q', visible: true },
+      { letter: 'r', visible: true },
+      { letter: 's', visible: true },
+      { letter: 't', visible: true },
+      { letter: 'u', visible: true },
+      { letter: 'v', visible: true },
+      { letter: 'w', visible: true },
+      { letter: 'x', visible: true },
+      { letter: 'y', visible: true },
+      { letter: 'z', visible: true },
     ];
   }
   openModal() {
@@ -70,9 +70,6 @@ export class MainComponent implements OnInit {
     this.modal.open();
   }
 
-  // pauseGame() {
-  //   this.openModal();
-  // }
   //generates new game
   generateNewGame = () => {
     this.setLetters();
@@ -87,7 +84,6 @@ export class MainComponent implements OnInit {
     const countItems = this.data[choosenCategory].length;
     const randomNumber = Math.floor(Math.random() * countItems);
     this.progress = 0;
-
     //choose random word
     if (
       this.data &&
@@ -119,9 +115,9 @@ export class MainComponent implements OnInit {
     this.router.navigate(['']);
   }
 
-  choosenLetter(letter: string): any {
+  choosenLetter(item: any): any {
     for (let i = 0; i < this.secretWordArray.length; i++) {
-      if (this.secretWordArray[i].key.toLowerCase() === letter) {
+      if (this.secretWordArray[i].key.toLowerCase() === item.letter) {
         this.secretWordArray[i].visible = true;
       }
 
@@ -137,7 +133,7 @@ export class MainComponent implements OnInit {
     }
 
     //decrease player score for every incorect attempt
-    if (!this.secretWord.toLowerCase().includes(letter)) {
+    if (!this.secretWord.toLowerCase().includes(item.letter)) {
       this.score--;
       if (this.score >= 4) {
         this.heartBeating--;
@@ -146,9 +142,12 @@ export class MainComponent implements OnInit {
       }
     }
 
-    //find index of the letter to remove
-    let removeChoosenLetter = this.letters.filter((el: any) => el !== letter);
-    this.letters = removeChoosenLetter;
+    //find index of the letter to disable
+    for (let i = 0; i < this.letters.length; i++) {
+      if (this.letters[i].letter === item.letter) {
+        this.letters[i].visible = false;
+      }
+    }
 
     //display alert message if playes lose the game
     if (this.score === 0) {
@@ -157,7 +156,7 @@ export class MainComponent implements OnInit {
       return;
     }
 
-    if (!this.secretWord.toLowerCase().includes(letter)) {
+    if (!this.secretWord.toLowerCase().includes(item.letter)) {
       this.progress++;
     }
   }
