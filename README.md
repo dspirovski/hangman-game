@@ -7,7 +7,9 @@ In this Hangman game, user is able to:
 - see their current health decrease based on incorrect letter guesses;
 - win the game if they complete the whole word;
 - lose the game if they make tenwrong guesses;
-- pause the game and choose to continue, pick a new category, or quit.
+- pause the game and choose to continue, pick a new category, or quit;
+- See hover and focus states for all interactive elements on the page;
+- Navigate the entire game only using their keyboard.
 
 This project was made with Angular standalone components (angular version 17.2.0, node version 18.14.0).
 
