@@ -1,5 +1,5 @@
 import { ModalService } from './../../services/modal.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import * as data from '../../../../data.json';
@@ -33,6 +33,15 @@ export class MainComponent implements OnInit {
     this.playerWins = null;
 
     this.generateNewGame();
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  handleKeyDown(event: KeyboardEvent): void {
+    const inputChar = event.key;
+    if (inputChar.length === 1 && /^[a-zA-Z]$/.test(inputChar)) {
+      console.log(`Key pressed: ${inputChar}`);
+      this.choosenLetter(inputChar);
+    }
   }
 
   setLetters() {
@@ -116,8 +125,21 @@ export class MainComponent implements OnInit {
   }
 
   choosenLetter(item: any): any {
+    const choosenLetter = item.letter ? item.letter : item;
+
+    for (let i = 0; i < this.letters.length; i++) {
+      if (this.letters[i].letter === choosenLetter) {
+        if (this.letters[i].visible === false) {
+          return;
+        } else {
+          if (!this.secretWord.toLowerCase().includes(choosenLetter)) {
+            this.progress++;
+          }
+        }
+      }
+    }
     for (let i = 0; i < this.secretWordArray.length; i++) {
-      if (this.secretWordArray[i].key.toLowerCase() === item.letter) {
+      if (this.secretWordArray[i].key.toLowerCase() === choosenLetter) {
         this.secretWordArray[i].visible = true;
       }
 
@@ -133,8 +155,9 @@ export class MainComponent implements OnInit {
     }
 
     //decrease player score for every incorect attempt
-    if (!this.secretWord.toLowerCase().includes(item.letter)) {
+    if (!this.secretWord.toLowerCase().includes(choosenLetter)) {
       this.score--;
+
       if (this.score >= 4) {
         this.heartBeating--;
       } else {
@@ -144,7 +167,7 @@ export class MainComponent implements OnInit {
 
     //find index of the letter to disable
     for (let i = 0; i < this.letters.length; i++) {
-      if (this.letters[i].letter === item.letter) {
+      if (this.letters[i].letter === choosenLetter) {
         this.letters[i].visible = false;
       }
     }
@@ -154,10 +177,6 @@ export class MainComponent implements OnInit {
       this.playerLoose = true;
       this.modal.open();
       return;
-    }
-
-    if (!this.secretWord.toLowerCase().includes(item.letter)) {
-      this.progress++;
     }
   }
 }
