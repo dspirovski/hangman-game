@@ -4,6 +4,18 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import * as data from '../../../../data.json';
 import { ModalComponent } from '../modal/modal.component';
+
+interface Letter {
+  letter: string;
+  visible: boolean;
+}
+
+interface SecretWordCharacter {
+  key: string;
+  visible: boolean;
+  hidden?: boolean;
+}
+
 @Component({
   selector: 'app-main',
   standalone: true,
@@ -12,18 +24,17 @@ import { ModalComponent } from '../modal/modal.component';
   styleUrl: './main.component.css',
 })
 export class MainComponent implements OnInit {
-  data: any;
+  data: any = data;
   secretWord: string = '';
-  secretWordArray: any = [];
-  progress = 5;
-  score: any = 10;
-  playerWins: any = '';
-  playerLoose: any = '';
-  choosenCategory: any = '';
-  heartBeating: any = 8;
-  gameIsPaused: boolean = false;
-
-  letters: any = [];
+  secretWordArray: SecretWordCharacter[] = [];
+  progress = 0;
+  score = 10;
+  playerWins: boolean | null = null;
+  playerLoose: boolean | null = null;
+  choosenCategory: string | null = '';
+  heartBeating = 8;
+  gameIsPaused = false;
+  letters: Letter[] = [];
 
   constructor(private router: Router, private modal: ModalService) {}
 
@@ -37,44 +48,20 @@ export class MainComponent implements OnInit {
 
   @HostListener('document:keydown', ['$event'])
   handleKeyDown(event: KeyboardEvent): void {
-    const inputChar = event.key;
+    const inputChar = event.key.toLowerCase();
     if (inputChar.length === 1 && /^[a-zA-Z]$/.test(inputChar)) {
       console.log(`Key pressed: ${inputChar}`);
       this.choosenLetter(inputChar);
     }
   }
 
-  setLetters() {
-    this.letters = [
-      { letter: 'a', visible: true },
-      { letter: 'b', visible: true },
-      { letter: 'c', visible: true },
-      { letter: 'd', visible: true },
-      { letter: 'e', visible: true },
-      { letter: 'f', visible: true },
-      { letter: 'g', visible: true },
-      { letter: 'h', visible: true },
-      { letter: 'i', visible: true },
-      { letter: 'j', visible: true },
-      { letter: 'k', visible: true },
-      { letter: 'l', visible: true },
-      { letter: 'm', visible: true },
-      { letter: 'n', visible: true },
-      { letter: 'o', visible: true },
-      { letter: 'p', visible: true },
-      { letter: 'q', visible: true },
-      { letter: 'r', visible: true },
-      { letter: 's', visible: true },
-      { letter: 't', visible: true },
-      { letter: 'u', visible: true },
-      { letter: 'v', visible: true },
-      { letter: 'w', visible: true },
-      { letter: 'x', visible: true },
-      { letter: 'y', visible: true },
-      { letter: 'z', visible: true },
-    ];
+  private setLetters(): void {
+    const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+    this.letters = alphabet
+      .split('')
+      .map((letter) => ({ letter, visible: true }));
   }
-  openModal() {
+  openModal(): void {
     this.gameIsPaused = true;
     this.modal.open();
   }
@@ -108,6 +95,7 @@ export class MainComponent implements OnInit {
 
     for (let i = 0; i < characters.length; i++) {
       if (characters[i] === ' ') {
+        debugger;
         this.secretWordArray.push({
           key: characters[i],
           visible: true,
@@ -119,64 +107,57 @@ export class MainComponent implements OnInit {
     }
   };
 
-  exitGame() {
+  exitGame(): void {
     localStorage.removeItem('choosenCategory');
     this.router.navigate(['']);
   }
 
-  choosenLetter(item: any): any {
-    const choosenLetter = item.letter ? item.letter : item;
+  choosenLetter(letter: any): void {
+    debugger;
+    const matchedLetters = this.secretWord
+      .toLowerCase()
+      .includes(letter.letter);
 
-    for (let i = 0; i < this.letters.length; i++) {
-      if (this.letters[i].letter === choosenLetter) {
-        if (this.letters[i].visible === false) {
-          return;
-        } else {
-          if (!this.secretWord.toLowerCase().includes(choosenLetter)) {
-            this.progress++;
-          }
-        }
-      }
-    }
-    for (let i = 0; i < this.secretWordArray.length; i++) {
-      if (this.secretWordArray[i].key.toLowerCase() === choosenLetter) {
-        this.secretWordArray[i].visible = true;
-      }
-
-      const checkForCorrectAnswer = this.secretWordArray.every((el: any) => {
-        return el.visible === true;
-      });
-
-      if (checkForCorrectAnswer) {
-        this.playerWins = true;
-        this.playerLoose = false;
-        this.modal.open();
-      }
+    if (!matchedLetters) {
+      this.progress++;
+      this.updateScore();
     }
 
-    //decrease player score for every incorect attempt
-    if (!this.secretWord.toLowerCase().includes(choosenLetter)) {
-      this.score--;
+    this.updateSecretWordArray(letter.letter);
+    this.updateLetters(letter.letter);
+    this.checkGameStatus();
+  }
 
-      if (this.score >= 4) {
-        this.heartBeating--;
-      } else {
-        this.heartBeating -= 0.5;
-      }
-    }
+  private updateScore(): void {
+    this.score--;
+    this.heartBeating -= this.score >= 4 ? 1 : 0.5;
+  }
 
-    //find index of the letter to disable
-    for (let i = 0; i < this.letters.length; i++) {
-      if (this.letters[i].letter === choosenLetter) {
-        this.letters[i].visible = false;
-      }
-    }
+  private updateSecretWordArray(letter: any): void {
+    debugger;
+    this.secretWordArray = this.secretWordArray.map((charObj) =>
+      charObj.key.toLowerCase() === letter
+        ? { ...charObj, visible: true }
+        : charObj
+    );
+  }
 
-    //display alert message if playes lose the game
-    if (this.score === 0) {
+  private updateLetters(letter: any): void {
+    debugger;
+    this.letters = this.letters.map((charObj) =>
+      charObj.letter === letter ? { ...charObj, visible: false } : charObj
+    );
+  }
+
+  private checkGameStatus(): void {
+    if (this.secretWordArray.every((char) => char.visible)) {
+      debugger;
+      this.playerWins = true;
+      this.playerLoose = false;
+      this.modal.open();
+    } else if (this.score <= 0) {
       this.playerLoose = true;
       this.modal.open();
-      return;
     }
   }
 }
